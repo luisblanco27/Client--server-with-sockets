@@ -155,14 +155,12 @@ if __name__ == '__main__':
 
                     # 5) Esperar confirmación de recepción de datos
                     confirm = cliente.recv(args.tam_buf).decode("ascii").strip()
-                    if confirm != "DATA_RECEIVED":
-                        print("Error: no se recibió confirmación de datos.")
-                    else:
-                        print("Confirmación recibida: DATA_RECEIVED")
-
-                        # 6) Recibir mensaje final de éxito
-                        success = cliente.recv(args.tam_buf).decode("ascii").strip()
-                        print(success)
+                    mensajes = confirm.split("\n")
+                    for msg in mensajes:
+                        if msg == "DATA_RECEIVED":
+                            print("Confirmación recibida")
+                        elif msg.startswith("SUCCESS"):
+                            print(msg)
 
         except FileNotFoundError:
             print(f"Error: el fichero '{fichero}' no existe en el cliente.")

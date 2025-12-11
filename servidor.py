@@ -117,10 +117,10 @@ def subir_fichero(conn,fichero):
                 recibido += len(bloque)
 
         #Confirmar recepción de datos
-        conn.sendall("DATA_RECEIVED".encode("ascii"))
+        conn.sendall("DATA_RECEIVED\n".encode("ascii"))
 
         #Mensaje final de éxito
-        response = f"SUCCESS: Fichero '{nombre}' subido correctamente."
+        response = f"SUCCESS: Fichero '{nombre}' subido correctamente.\n"
         conn.sendall(response.encode("ascii"))
         return response
 
